@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request
-
+from game2048.FIRST_RNN import RNN
 
 def get_flask_app(game, agent):
     app = Flask(__name__)
-
+       
     @app.route("/")
     def index():
         return app.send_static_file('board.html')
-
+    
     @app.route("/board", methods=['GET', 'POST'])
     def get_board():
         direction = -1
@@ -31,17 +31,17 @@ if __name__ == "__main__":
     GAME_SIZE = 4
     SCORE_TO_WIN = 2048
     APP_PORT = 5005
-    APP_HOST = "0.0.0.0"
+    APP_HOST = "localhost"
 
     from game2048.game import Game
     game = Game(size=GAME_SIZE, score_to_win=SCORE_TO_WIN)
 
     try:
-        from game2048.agents import ExpectiMaxAgent
-        agent = ExpectiMaxAgent(game=game)
+        from game2048.agents import plan
+        agent = plan(game=game)
     except:
         from game2048.agents import RandomAgent
-        print("WARNING: Please compile the ExpectiMaxAgent first following the README.")
+        print("WARNING: Please compile the plan first following the README.")
         print("WARNING: You are now using a RandomAgent.")
         agent = RandomAgent(game=game)
 
