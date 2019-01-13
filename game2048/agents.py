@@ -63,7 +63,7 @@ class Rnn_Agent(Agent):
             raise ValueError(
                 "`%s` can only work with game of `size` 4." % self.__class__.__name__)
         super().__init__(game, display)
-        self.model = torch.load('/home/noone/桌面/2048-api-master/game2048/rnn.pkl',map_location=lambda storage, loc:storage)
+        self.model = torch.load('game2048.rnn.pkl',map_location=lambda storage, loc:storage)
         #self.model2 = torch.load('/home/noone/桌面/2048-api-master/game2048/rnn+512.pkl',map_location=lambda storage, loc:storage)
     def step(self):
             #flag = 0
